@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 
 /*$categoriesArray = [
@@ -24,19 +24,9 @@ $shopName = 'Technopark Shop';
 $companyName = 'Technopark';
 $url = 'https://technopark.ru';
 
-$pdo = new PDO('pgsql:host=localhost;dbname=vsim;user=postgres;password=postgres');
+//$pdo = new PDO('pgsql:host=localhost;dbname=vsim;user=postgres;password=postgres');
 //$pdo = new PDO('mysql://root:roots@localhost:3306/test'); // not working with mysql 5.7
 //$pdo = new PDO('mysql:host=localhost;dbname=test;port=3306', 'root', 'roots');
-
-
-$mysqliFn = function ($host, $user, $password, $dbname, $port) {
-    $instance = mysqli_init();
-    $instance->real_connect('localhost', 'root', 'roots', 'test', 3306);
-    
-    return $instance;
-};
-//$mysqli = $mysqliFn('localhost', 'root', 'roots', 'test', 3306);
-
 $pdoPhalcon = new Phalcon\Db\Adapter\Pdo\Mysql([
     "host"     => "localhost",
     "dbname"   => "test",
@@ -45,15 +35,24 @@ $pdoPhalcon = new Phalcon\Db\Adapter\Pdo\Mysql([
     "password" => "roots",
 ]);
 
+$mysqliFn = function ($host, $user, $password, $dbname, $port) {
+    $instance = mysqli_init();
+    $instance->real_connect('localhost', 'root', 'roots', 'test', 3306);
+
+    return $instance;
+};
+//$mysqli = $mysqliFn('localhost', 'root', 'roots', 'test', 3306);
 
 
 
-//$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdo($pdoPhalcon);
-$cIterator = new Yml\Iterators\CategoryIteratorPdoFetch($pdo);
+$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdo($pdoPhalcon);
+//$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdoFetchAll($pdoPhalcon);
+//$cIterator = new Yml\Iterators\CategoryIteratorPdoFetch($pdo);
 //$cIterator = new Yml\Iterators\CategoryIteratorMysqli($mysqli);
 
-//$oIterator = new Yml\Iterators\OfferIteratorPhalconPdo($pdoPhalcon);
-$oIterator = new Yml\Iterators\OfferIteratorPdoFetch($pdo);
+$oIterator = new Yml\Iterators\OfferIteratorPhalconPdo($pdoPhalcon);
+//$oIterator = new Yml\Iterators\OfferIteratorPhalconPdoFetchAll($pdoPhalcon);
+//$oIterator = new Yml\Iterators\OfferIteratorPdoFetch($pdo);
 //$oIterator = new Yml\Iterators\OfferIteratorMysqli($mysqli);
 
 $fileName = __DIR__  . '/tempX.xml';

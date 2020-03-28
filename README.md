@@ -117,6 +117,27 @@ Total fetched offers: 841322
 Total file size: 139.18 MB
 ```
 
+
+- **Phalcon PDO (MySql) FetchALL Db::FETCH_OBJ / Db::FETCH_ASSOC **
+
+  Connect via
+    ```
+    $pdo = new Phalcon\Db\Adapter\Pdo\Mysql([...])
+    ```
+```
+Generating categories:
+Query time: 1.29 / 1.11
+Total fetched categories: 841335 / 841335
+841335 objects
+Generating offers:
+Query time: 50.14 / 45.86
+Total fetched offers: 841322 / 841322
+841322 objects
+Время выполнения: 110.98 Sec
+Использовано ОЗУ: 1,229.04 MB / 1,149.04 MB
+Total file size: 139.18 MB / 139.18 MB
+```
+
 ## Result
 
 Real cursors are possible if connection established via

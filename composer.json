@@ -1,0 +1,22 @@
+{
+    "name": "ilya-direct/xml-generator",
+    "authors": [
+        {
+            "name": "ilya",
+            "email": "ilya-direct@ya.ru"
+        }
+    ],
+    "require": {
+      "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yml\\Models\\" : "Models",
+            "Yml\\Iterators\\" : "Iterators"
+        },
+        "files": [
+            "Wrapper.php",
+            "Generator.php"
+        ]
+    }
+}
