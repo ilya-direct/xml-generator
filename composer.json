@@ -12,7 +12,8 @@
     "autoload": {
         "psr-4": {
             "Yml\\Models\\" : "Models",
-            "Yml\\Iterators\\" : "Iterators"
+            "Yml\\Iterators\\" : "Iterators",
+            "PhalconModels\\" : "PhalconModels"
         },
         "files": [
             "Wrapper.php",

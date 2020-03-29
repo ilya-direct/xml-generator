@@ -138,6 +138,23 @@ Total fetched offers: 841322 / 841322
 Total file size: 139.18 MB / 139.18 MB
 ```
 
+
+- **Phalcon Model. Query Builder (ResultSet) **
+
+```
+Generating categories:
+Query time: 0.46
+Total fetched categories: 841335
+841335 objects
+Generating offers:
+Query time: 0.70
+Total fetched offers: 841322
+841322 objects
+Время выполнения: 76.59 Sec
+Использовано ОЗУ: 368.39 MB
+Total file size: 139.18 MB
+```
+
 ## Result
 
 Real cursors are possible if connection established via

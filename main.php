@@ -3,6 +3,44 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 
+use Phalcon\Loader;
+
+$loader = new Loader();
+
+$loader->registerDirs(
+    [
+        'PhalconModels',
+    ]
+);
+
+$loader->register();
+
+$container = new \Phalcon\Di();
+$container->set(
+    'db',
+    function () {
+        return new \Phalcon\Db\Adapter\Pdo\Mysql(
+            [
+                'host'     => 'localhost',
+                'username' => 'root',
+                'password' => 'roots',
+                'dbname'   => 'test',
+            ]
+        );
+    }
+);
+
+$container->set(
+    'modelsManager',
+    new \Phalcon\Mvc\Model\Manager()
+);
+
+$container->set(
+    'modelsMetadata',
+    new \Phalcon\Mvc\Model\MetaData\Memory()
+);
+
+
 /*$categoriesArray = [
     ['id' => 1, 'name' => 'cname1', 'parent_id' => 11],
     ['id' => 2, 'name' => 'cname2', 'parent_id' => 22],
@@ -26,7 +64,7 @@ $url = 'https://technopark.ru';
 
 //$pdo = new PDO('pgsql:host=localhost;dbname=vsim;user=postgres;password=postgres');
 //$pdo = new PDO('mysql://root:roots@localhost:3306/test'); // not working with mysql 5.7
-//$pdo = new PDO('mysql:host=localhost;dbname=test;port=3306', 'root', 'roots');
+$pdo = new PDO('mysql:host=localhost;dbname=test;port=3306', 'root', 'roots');
 $pdoPhalcon = new Phalcon\Db\Adapter\Pdo\Mysql([
     "host"     => "localhost",
     "dbname"   => "test",
@@ -45,12 +83,14 @@ $mysqliFn = function ($host, $user, $password, $dbname, $port) {
 
 
 
-$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdo($pdoPhalcon);
+$cIterator = new Yml\Iterators\CategoryIteratorPhalconModelResultSet();
+//$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdo($pdoPhalcon);
 //$cIterator = new Yml\Iterators\CategoryIteratorPhalconPdoFetchAll($pdoPhalcon);
 //$cIterator = new Yml\Iterators\CategoryIteratorPdoFetch($pdo);
 //$cIterator = new Yml\Iterators\CategoryIteratorMysqli($mysqli);
 
-$oIterator = new Yml\Iterators\OfferIteratorPhalconPdo($pdoPhalcon);
+$oIterator = new Yml\Iterators\OfferIteratorPhalconModelResultSet();
+//$oIterator = new Yml\Iterators\OfferIteratorPhalconPdo($pdoPhalcon);
 //$oIterator = new Yml\Iterators\OfferIteratorPhalconPdoFetchAll($pdoPhalcon);
 //$oIterator = new Yml\Iterators\OfferIteratorPdoFetch($pdo);
 //$oIterator = new Yml\Iterators\OfferIteratorMysqli($mysqli);
